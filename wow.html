@@ -1,0 +1,45 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Show Off 😎</title>
+<style>
+  body{margin:0;display:flex;justify-content:center;align-items:center;height:100vh;
+       background:linear-gradient(270deg,#ff00ff,#00ffff,#ffff00);background-size:600% 600%;
+       animation:bg 10s ease infinite;font-family:sans-serif;overflow:hidden}
+  @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  h1{font-size:3em;color:white;text-shadow:0 0 20px cyan,0 0 40px magenta}
+  button{position:absolute;bottom:30px;padding:15px 25px;border:none;border-radius:12px;
+         background:#111;color:#0ff;font-size:18px;box-shadow:0 0 15px #0ff;cursor:pointer}
+  canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none}
+</style>
+</head>
+<body>
+  <h1>🔥 Watch This! 🔥</h1>
+  <button onclick="boom()">Tap for Magic</button>
+  <canvas id="c"></canvas>
+<script>
+let c=document.getElementById("c"),ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+let parts=[];
+function boom(){
+  for(let i=0;i<150;i++)parts.push({
+    x:innerWidth/2,y:innerHeight/2,
+    vx:(Math.random()-0.5)*6,vy:(Math.random()-0.5)*6,
+    c:`hsl(${Math.random()*360},100%,50%)`,l:100
+  });
+}
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  parts.forEach((p,i)=>{
+    ctx.fillStyle=p.c;
+    ctx.fillRect(p.x,p.y,4,4);
+    p.x+=p.vx;p.y+=p.vy;p.vy+=0.05;p.l--;
+    if(p.l<0)parts.splice(i,1);
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>  
