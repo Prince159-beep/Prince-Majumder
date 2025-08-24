@@ -1,0 +1,149 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prince's Epic Blog</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at center, #000020, #000010);
+      color: white;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 70px 20px;
+      position: relative;
+    }
+    /* Bright Blue Aura */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,191,255,0.6), transparent 70%);
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: aura 5s infinite alternate ease-in-out;
+      z-index: -1;
+    }
+    @keyframes aura {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+    }
+    header h1 {
+      font-size: 3.5em;
+      margin: 0;
+      color: white;
+      text-shadow: 
+        0 0 25px #00BFFF, 
+        0 0 50px #1E90FF, 
+        0 0 100px #00BFFF, 
+        0 0 200px #1E90FF;
+      animation: brightglow 2s ease-in-out infinite alternate;
+    }
+    @keyframes brightglow {
+      from {
+        text-shadow: 0 0 25px #00BFFF, 0 0 50px #1E90FF, 0 0 100px #00BFFF, 0 0 200px #1E90FF;
+      }
+      to {
+        text-shadow: 0 0 40px #1E90FF, 0 0 80px #00BFFF, 0 0 150px #1E90FF, 0 0 250px #00BFFF;
+      }
+    }
+    header p {
+      font-size: 1.3em;
+      margin: 10px 0 0;
+      color: #87CEFA; /* light sky blue */
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(0,191,255,0.1);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,191,255,0.3);
+    }
+    .post {
+      margin-bottom: 40px;
+    }
+    .post h2 {
+      color: #00BFFF;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #1E90FF;
+    }
+    .post img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin: 15px 0;
+      box-shadow: 0 0 20px rgba(0,191,255,0.5);
+    }
+    .roast {
+      background: rgba(0,191,255,0.15);
+      padding: 15px;
+      border-radius: 15px;
+      font-style: italic;
+      margin-top: 20px;
+      color: #ffffff;
+      box-shadow: 0 0 25px rgba(0,191,255,0.3);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,191,255,0.1);
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #87CEFA;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prince's Legendary Blog</h1>
+    <p>🔥 The place where greatness meets pure roast 🔥</p>
+  </header>
+
+  <div class="container">
+    <div class="post">
+      <h2>About Me 😎</h2>
+      <p>
+        Hi, I'm <b>Prince</b> -- the coding king, the stylish one, and basically the upgrade of mankind.  
+        This blog is here to show off my greatness 💯.
+      </p>
+      <img src="https://source.unsplash.com/800x400/?crown,king" alt="Cool Crown">
+    </div>
+
+    <div class="post">
+      <h2>The Roast Zone 😂</h2>
+      <p>
+        And now... let's talk about my so-called "coder" friend.
+      </p>
+      <div class="roast">
+        Imagine a potato trying to code… yeah, that's my friend.  
+        His "Hello World" program crashes more than Windows XP.  
+        If excuses were coding languages, he'd be a full-stack developer by now 💀.
+      </div>
+      <img src="https://source.unsplash.com/800x400/?funny,meme" alt="Funny Meme">
+    </div>
+
+    <div class="post">
+      <h2>Conclusion ✨</h2>
+      <p>
+        Prince = 🔥.  
+        My friend = 🚮.  
+        That's all you need to know.  
+        Thanks for visiting my epic blog 😁.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Prince's Epic Blog | Made with 💖 and a little roast
+  </footer>
+</body>
+</html>
