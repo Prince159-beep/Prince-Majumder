@@ -1,0 +1,203 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PrinceSpark Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+    input, button, select {
+      width: 80%;
+      margin: 10px auto;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      display: block;
+    }
+    button {
+      background: #00ffcc;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff00cc;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Page -->
+  <div class="container" id="loginPage">
+    <h1>🔥 PrinceSpark Quiz 🔥</h1>
+    <input type="text" id="username" placeholder="Enter Name" required>
+    <input type="password" id="password" placeholder="Enter Password" required>
+    <button onclick="loginUser()">Login</button>
+  </div>
+
+  <!-- Subject Selection -->
+  <div class="container" id="subjectPage" style="display:none;">
+    <h2>Select Subject</h2>
+    <select id="subject">
+      <option value="math">Math</option>
+      <option value="science">Science</option>
+      <option value="gk">General Knowledge</option>
+    </select>
+    <button onclick="goDifficulty()">Next ➡️</button>
+  </div>
+
+  <!-- Difficulty Selection -->
+  <div class="container" id="difficultyPage" style="display:none;">
+    <h2>Select Difficulty</h2>
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <!-- Quiz Page -->
+  <div class="container" id="quizPage" style="display:none;">
+    <h2 id="welcome"></h2>
+    <div id="quiz-box"></div>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+
+  <!-- Result Page -->
+  <div class="container" id="resultPage" style="display:none;">
+    <h2>🎉 Quiz Finished 🎉</h2>
+    <p id="result"></p>
+    <button onclick="restart()">Play Again</button>
+  </div>
+
+  <script>
+    const questions = {
+      math: {
+        easy: [
+          {q: "What is 2 + 2?", options:["3","4","5","6"], answer:"4"},
+          {q: "What is 10 - 3?", options:["6","7","8","9"], answer:"7"}
+        ],
+        medium: [
+          {q: "What is 12 × 3?", options:["36","30","32","34"], answer:"36"},
+          {q: "What is 45 ÷ 5?", options:["7","8","9","10"], answer:"9"}
+        ],
+        hard: [
+          {q: "Solve: 5² + 3²", options:["25","34","30","29"], answer:"34"},
+          {q: "What is √144?", options:["10","11","12","13"], answer:"12"}
+        ]
+      },
+      science: {
+        easy: [
+          {q: "H2O is?", options:["Salt","Oxygen","Water","Hydrogen"], answer:"Water"},
+          {q: "Which planet is blue?", options:["Earth","Mars","Venus","Saturn"], answer:"Earth"}
+        ],
+        medium: [
+          {q: "What gas do plants release?", options:["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"], answer:"Oxygen"},
+          {q: "Which is the largest organ in the human body?", options:["Brain","Heart","Skin","Lungs"], answer:"Skin"}
+        ],
+        hard: [
+          {q: "What is the speed of light?", options:["3×10^8 m/s","3×10^6 m/s","3×10^5 km/s","30000 km/s"], answer:"3×10^8 m/s"},
+          {q: "What is the powerhouse of the cell?", options:["Nucleus","Mitochondria","Ribosome","Cytoplasm"], answer:"Mitochondria"}
+        ]
+      },
+      gk: {
+        easy: [
+          {q: "How many days are in a week?", options:["5","6","7","8"], answer:"7"},
+          {q: "Which is the national animal of India?", options:["Lion","Tiger","Elephant","Peacock"], answer:"Tiger"}
+        ],
+        medium: [
+          {q: "Who is the current PM of India?", options:["Modi","Nehru","Rahul Gandhi","Patel"], answer:"Modi"},
+          {q: "Which continent is largest?", options:["Asia","Africa","Europe","Australia"], answer:"Asia"}
+        ],
+        hard: [
+          {q: "In which year did India get independence?", options:["1945","1946","1947","1950"], answer:"1947"},
+          {q: "Who invented the telephone?", options:["Einstein","Graham Bell","Newton","Edison"], answer:"Graham Bell"}
+        ]
+      }
+    };
+
+    let currentUser = "";
+    let currentSubject = "";
+    let currentDifficulty = "";
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loginUser() {
+      const name = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if(name && pass) {
+        currentUser = name;
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("subjectPage").style.display = "block";
+      } else {
+        alert("Enter name and password!");
+      }
+    }
+
+    function goDifficulty() {
+      currentSubject = document.getElementById("subject").value;
+      document.getElementById("subjectPage").style.display = "none";
+      document.getElementById("difficultyPage").style.display = "block";
+    }
+
+    function startQuiz() {
+      currentDifficulty = document.getElementById("difficulty").value;
+      document.getElementById("difficultyPage").style.display = "none";
+      document.getElementById("quizPage").style.display = "block";
+      document.getElementById("welcome").innerText = "Welcome " + currentUser + " 👑 ("+currentDifficulty+")";
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = questions[currentSubject][currentDifficulty][currentQuestion];
+      document.getElementById("quiz-box").innerHTML = `
+        <h3>${q.q}</h3>
+        ${q.options.map(opt => `<button onclick="checkAnswer('${opt}')">${opt}</button>`).join("")}
+      `;
+    }
+
+    function checkAnswer(selected) {
+      if (selected === questions[currentSubject][currentDifficulty][currentQuestion].answer) {
+        score++;
+      }
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if(currentQuestion < questions[currentSubject][currentDifficulty].length){
+        loadQuestion();
+      } else {
+        document.getElementById("quizPage").style.display = "none";
+        document.getElementById("resultPage").style.display = "block";
+        document.getElementById("result").innerText = 
+          currentUser + ", your score is " + score + "/" + questions[currentSubject][currentDifficulty].length;
+      }
+    }
+
+    function restart() {
+      currentQuestion = 0;
+      score = 0;
+      document.getElementById("resultPage").style.display = "none";
+      document.getElementById("subjectPage").style.display = "block";
+    }
+  </script>
+</body>
+</html>
